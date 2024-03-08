@@ -1,19 +1,21 @@
 package com.example.cellularautomata;
 
+import java.util.Random;
+
 public class Generation {
     private Cell[] cells;
     private Rule rule;
 
-    //todo
-    public Generation(byte ruleNumber) {
-        this.rule = new Rule(ruleNumber);
-        this.cells = new Cell[10];
+    public Generation(Rule rule, int size) {
+        this.rule = rule;
+        this.cells = new Cell[size];
+
         cells[0] = new Cell(false);
         cells[cells.length - 1] = new Cell(false);
+
         for (int i = 1; i < cells.length - 1; i++) {
-            cells[i] = new Cell(false);
+            cells[i] = new Cell(new Random().nextBoolean());
         }
-        cells[5] = new Cell(true);
     }
 
     public Generation(Cell[] cells, Rule rule) {
@@ -31,8 +33,10 @@ public class Generation {
 
     public Generation nextGeneration() {
         Cell[] nextCells = new Cell[cells.length];
+
         nextCells[0] = new Cell(false);
         nextCells[cells.length - 1] = new Cell(false);
+
         for (int i = 1; i < cells.length - 1; i++) {
             Cell leftNeighbor = cells[i - 1];
             Cell rightNeighbor = cells[i + 1];
@@ -40,7 +44,9 @@ public class Generation {
             Cell nextCell = rule.getNextCell(currentCell, rightNeighbor, leftNeighbor);
             nextCells[i] = nextCell;
         }
+
         cells = nextCells;
+
         return new Generation(nextCells, rule);
     }
 
