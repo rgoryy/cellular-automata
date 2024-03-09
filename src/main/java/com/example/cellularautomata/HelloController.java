@@ -28,7 +28,7 @@ public class HelloController {
 
         try {
             int size = gridPane.getColumnCount();
-            Rule r = new Rule(Byte.parseByte(rule.getText()));
+            Rule r = new Rule(Integer.parseInt(rule.getText()));
 
             currentGeneration = new Generation(r, size);
             drawGeneration(currentGeneration, 0);

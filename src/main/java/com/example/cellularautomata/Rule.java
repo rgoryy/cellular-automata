@@ -5,7 +5,7 @@ import java.util.Map;
 public class Rule {
     private final Map<String, Character> ruleMap;
 
-    public Rule(byte rule) {
+    public Rule(int rule) {
         StringBuilder binaryRule = new StringBuilder(Integer.toBinaryString(rule));
         while (binaryRule.length() < 8) {
             binaryRule.insert(0, "0");
